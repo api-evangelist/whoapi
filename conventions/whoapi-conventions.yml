@@ -1,0 +1,39 @@
+generated: '2026-07-21'
+method: searched
+source: https://whoapi.com/api-documentation/
+authentication:
+  style: api-key-query
+  parameter: apikey
+  ref: authentication/whoapi-authentication.yml
+transport:
+  methods: [GET]
+  base_url: https://api.whoapi.com/
+  schemes: [http, https]
+  task_selector: r
+  content_type: application/json; charset=utf-8
+  compression: gzip
+  output_formats: [json, xml]
+error_envelope:
+  status_field: status
+  description_field: status_desc
+  success_value: 0
+  note: Errors are returned in-band with HTTP 200; check the numeric `status`.
+  ref: errors/whoapi-error-codes.yml
+idempotency:
+  supported: false
+  note: >-
+    No idempotency-key contract. All operations are safe read-only HTTP GET
+    requests and are therefore naturally idempotent by HTTP semantics, but the
+    provider documents no Idempotency-Key mechanism.
+pagination:
+  supported: false
+  note: Single-record lookups per request; no list pagination surface documented.
+rate_limiting:
+  documented: true
+  note: >-
+    Per-minute IP throttling (status 16), per-plan query limits (status 17/18/36),
+    and high-usage limits are enforced; limits vary by plan. No rate-limit
+    response headers documented.
+versioning:
+  scheme: none
+  note: No version segment in the URL or version header; single unversioned endpoint.

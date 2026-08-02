@@ -1,0 +1,33 @@
+# WhoAPI
+
+> WhoAPI (founded 2011) is a domain-intelligence API providing WHOIS, domain availability, domain age, domain reputation/score, SSL certificate inspection, email score, IP/domain blacklist checks, and website screenshots through a single key-authenticated REST endpoint (api.whoapi.com). Every request is an HTTP GET selecting a task with the `r` parameter and returning gzip-compressed JSON with a numeric `status` and human-readable `status_desc`.
+
+## APIs
+
+- [WhoAPI Domain Intelligence API](https://whoapi.com/api-documentation/): Nine tasks selected via `r` — whois, taken, cert, domainscore, domainscore-check, emailscore, emailscore-check, blacklist, screenshot. Auth: `apikey` query parameter.
+
+## Specs
+
+- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/whoapi/refs/heads/main/openapi/whoapi-openapi.yml): Generated from the published documentation.
+
+## Docs
+
+- [API Documentation](https://whoapi.com/api-documentation/)
+- [Code Examples](https://whoapi.com/code-examples/) (PHP, JavaScript, Ruby, Python, Objective-C, C#, Java)
+- [Supported TLDs](https://whoapi.com/list-of-available-tlds/)
+- [Pricing](https://whoapi.com/whois-api-pricing/)
+- [Sign Up](https://my.whoapi.com/user/signup)
+- [Status](https://status.whoapi.com)
+
+## SDKs
+
+- [Ruby gem `whoapi`](https://rubygems.org/gems/whoapi)
+- [Python `whoapi`](https://pypi.org/project/whoapi/)
+- [Go `whoapi-go`](https://github.com/WhoAPI/whoapi-go) (includes a CLI)
+- [R `whoapi`](https://cran.r-project.org/package=whoapi)
+
+## Conventions
+
+- Auth: private API key as `apikey` query parameter; optional IP whitelisting.
+- Errors: returned in-band with HTTP 200; branch on the numeric `status` (0 = success, 1-42 = documented errors).
+- No versioning, no pagination, no idempotency-key contract (all tasks are safe GET reads).

@@ -1,0 +1,27 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/whoapi-openapi.yml + https://whoapi.com/api-documentation/
+standards:
+- id: oauth2
+  conforms: false
+  evidence: No oauth2 securityScheme; API is single-key (apiKey in query).
+- id: openid-connect
+  conforms: false
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors use a proprietary numeric status/status_desc envelope, not application/problem+json.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returned 404.
+- id: rest-json
+  conforms: true
+  evidence: JSON responses over HTTP; Content-Type application/json; charset=utf-8.
+- id: https-tls
+  conforms: true
+  evidence: HTTPS supported on api.whoapi.com (probed; see security/whoapi-domain-security.yml).
+- id: pagination
+  conforms: false
+  evidence: Single-record lookups; no list pagination.
+- id: idempotency
+  conforms: partial
+  evidence: All operations are safe GET reads (naturally idempotent) but no Idempotency-Key contract.

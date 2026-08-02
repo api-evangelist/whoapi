@@ -1,0 +1,16 @@
+generated: '2026-07-21'
+method: searched
+source: https://whoapi.com/api-documentation/
+note: >-
+  WhoAPI documents a demo API key for trying requests from the documentation.
+  There is no separate test-vs-live host or key prefix scheme; live keys are
+  issued after signup.
+test_credentials:
+- kind: demo-api-key
+  value: demokey
+  usage: https://api.whoapi.com/?domain=whoapi.com&r=taken&apikey=demokey
+  note: Published demo key used in the documentation examples.
+modes:
+  test_live_separation: false
+  note: Single production endpoint; no dedicated sandbox host.
+signup: https://my.whoapi.com/user/signup

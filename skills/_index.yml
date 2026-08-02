@@ -1,0 +1,12 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/whoapi-openapi.yml
+skills:
+- file: whoapi-check-domain-availability.md
+  name: Check domain availability with WhoAPI
+  api: openapi/whoapi-openapi.yml
+  operations: [queryWhoAPI]
+- file: whoapi-whois-lookup.md
+  name: Look up WHOIS records with WhoAPI
+  api: openapi/whoapi-openapi.yml
+  operations: [queryWhoAPI]

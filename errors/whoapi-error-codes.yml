@@ -1,0 +1,56 @@
+generated: '2026-07-21'
+method: searched
+source: https://whoapi.com/api-documentation/
+format: whoapi-status-code
+envelope:
+  status_field: status
+  description_field: status_desc
+  success_value: 0
+  note: >-
+    Every response carries a numeric `status` and a plain-English `status_desc`.
+    A `status` of 0 means success; any non-zero value is an application-level
+    error even though the HTTP response is 200.
+error_codes:
+- {code: 0, meaning: Request successful!, class: success}
+- {code: 1, meaning: Invalid characters in a domain name., class: validation}
+- {code: 2, meaning: Use of a double dot in the domain name., class: validation}
+- {code: 3, meaning: Domain name starting or ending with dash or dot., class: validation}
+- {code: 4, meaning: TLD does not exist., class: validation}
+- {code: 5, meaning: Too many characters in domain name (without TLD), maximum length is 64., class: validation}
+- {code: 6, meaning: Too many characters in TLD., class: validation}
+- {code: 7, meaning: Whois server not yet supported. We are adding new servers on a monthly basis., class: unsupported}
+- {code: 8, meaning: Missing request type in 'r' parameter., class: validation}
+- {code: 9, meaning: Invalid request type in 'r' parameter., class: validation}
+- {code: 10, meaning: API key invalid., class: auth}
+- {code: 11, meaning: Invalid characters in 'port' parameter., class: validation}
+- {code: 12, meaning: Invalid API account., class: auth}
+- {code: 13, meaning: Account suspended., class: account}
+- {code: 14, meaning: Account canceled., class: account}
+- {code: 15, meaning: IP not whitelisted in Account settings., class: auth}
+- {code: 16, meaning: Too many tries, your IP has been blocked for a minute., class: rate-limit}
+- {code: 17, meaning: Query limit exceeded., class: rate-limit}
+- {code: 18, meaning: Query high usage limit exceeded., class: rate-limit}
+- {code: 19, meaning: Missing domain name in 'domain' parameter., class: validation}
+- {code: 20, meaning: Invalid IP address in 'ip' parameter., class: validation}
+- {code: 21, meaning: Invalid 'fullurl' parameter, must be fully qualified URL., class: validation}
+- {code: 22, meaning: Invalid node data, only numeric characters allowed., class: validation}
+- {code: 23, meaning: Missing 'port' parameter., class: validation}
+- {code: 24, meaning: Missing valid TLD in a domain name., class: validation}
+- {code: 25, meaning: Unknown output type., class: validation}
+- {code: 26, meaning: Timeout getting the result from a node., class: server}
+- {code: 27, meaning: Fatal error detected in result from a node., class: server}
+- {code: 28, meaning: Unknown error detected in result from a node., class: server}
+- {code: 29, meaning: Cannot resolve domain name, IP needed., class: server}
+- {code: 30, meaning: Problem with the WHOIS server, please try again later., class: server}
+- {code: 31, meaning: WHOIS limit reached for used WhoAPI node. Please make a new request., class: server}
+- {code: 32, meaning: Cannot resolve domain availability by using the requested method., class: server}
+- {code: 33, meaning: You can't make requests on a free account. Please upgrade., class: account}
+- {code: 34, meaning: Your free account has ended. Please upgrade in order to make additional requests., class: account}
+- {code: 35, meaning: You run out of free requests. Please upgrade in order to make additional requests., class: account}
+- {code: 36, meaning: You run out of monthly requests. Query limit exceeded., class: rate-limit}
+- {code: 37, meaning: You need to pass domain or IP param. or both to get the score., class: validation}
+- {code: 38, meaning: Invalid domain address in 'domain' parameter., class: validation}
+- {code: 39, meaning: Invalid IP in 'IP' parameter., class: validation}
+- {code: 40, meaning: You need to pass 'email' or 'IP' parameter or both to get the score., class: validation}
+- {code: 41, meaning: Invalid email address in 'email' parameter., class: validation}
+- {code: 42, meaning: Unable to check domain availability., class: server}

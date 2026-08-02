@@ -1,0 +1,16 @@
+generated: '2026-07-21'
+method: searched
+source: https://whoapi.com/api-documentation/
+versioning:
+  scheme: none
+  current: null
+  note: Single unversioned endpoint (api.whoapi.com); task selected via `r` parameter.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No published deprecation policy or RFC 8594 Sunset/Deprecation header support found.
+sla:
+  url: null
+  uptime_target: null
+status_page: https://status.whoapi.com
+deprecated_operations: []

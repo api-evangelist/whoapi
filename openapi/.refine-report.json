@@ -1,0 +1,14 @@
+{
+  "provider": "whoapi",
+  "sources": [
+    "whoapi-domain-intelligence-api-openapi.yml"
+  ],
+  "outputs": [
+    "whoapi-domain-intelligence-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

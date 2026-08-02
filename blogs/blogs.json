@@ -1,0 +1,21 @@
+{
+  "repo": "whoapi",
+  "feeds": [
+    {
+      "source": "https://whoapi.com/code-examples/feed/",
+      "feed_url": "https://whoapi.com/code-examples/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://whoapi.com/code-examples/",
+      "feed_url": "https://whoapi.com/code-examples/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-08-01T15:49:00Z"
+}

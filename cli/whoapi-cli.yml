@@ -1,0 +1,27 @@
+generated: '2026-07-21'
+method: searched
+source: https://github.com/WhoAPI/whoapi-go
+cli:
+  name: whoapi
+  language: go
+  official: false
+  note: >-
+    Command-line tool bundled with the Go package (github.com/WhoAPI/whoapi-go,
+    mirror of github.com/tg/whoapi). Community-authored, hosted under the WhoAPI
+    GitHub organization.
+  install:
+  - method: go
+    command: go get github.com/tg/whoapi/...
+  auth:
+    mechanism: api-key
+    env: WHOAPI_KEY
+    note: API key can be provided via the WHOAPI_KEY environment variable or the --key flag.
+  usage: whoapi <task> <domain>
+  tasks_source: openapi/whoapi-openapi.yml#queryWhoAPI
+  tasks:
+  - whois
+  - taken
+  - cert
+  - domainscore
+  - emailscore
+  - blacklist

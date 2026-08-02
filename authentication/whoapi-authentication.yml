@@ -1,0 +1,21 @@
+generated: '2026-07-21'
+method: searched
+source: https://whoapi.com/api-documentation/
+docs: https://whoapi.com/api-documentation/
+summary:
+  types: [apiKey]
+  api_key_in: [query]
+  oauth2_flows: []
+schemes:
+- name: apiKey
+  type: apiKey
+  in: query
+  parameter: apikey
+  description: >-
+    Every request must carry the account's private API key as the `apikey`
+    query parameter, e.g. https://api.whoapi.com/?domain=whoapi.com&r=whois&apikey=YOUR_API_KEY
+  sources: [openapi/whoapi-openapi.yml]
+notes:
+- IP whitelisting is available in account settings (status code 15 = "IP not whitelisted").
+- No OAuth2/OIDC surface; the API is single-key.
+- Both HTTP and HTTPS are accepted; HTTPS recommended.

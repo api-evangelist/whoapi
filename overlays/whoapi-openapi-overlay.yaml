@@ -1,0 +1,23 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for WhoAPI
+  version: 1.0.0
+extends: openapi/whoapi-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-rating: 3
+    x-apievangelist-artifacts:
+      authentication: authentication/whoapi-authentication.yml
+      conventions: conventions/whoapi-conventions.yml
+      errors: errors/whoapi-error-codes.yml
+      lifecycle: lifecycle/whoapi-lifecycle.yml
+      data-model: data-model/whoapi-data-model.yml
+      mcp: mcp/whoapi-mcp.yml
+      sandbox: sandbox/whoapi-sandbox.yml
+- target: $.paths['/'].get
+  update:
+    x-agent-notes: >-
+      A non-zero JSON `status` is an application-level error even though HTTP is
+      200 — always branch on `status`, not the HTTP code. See the 43-code catalog
+      in errors/whoapi-error-codes.yml.

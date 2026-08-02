@@ -1,8 +1,34 @@
 aid: whoapi
 name: WhoAPI
-description: WhoAPI is a company surfaced as a portfolio company of 500-global and added to the API Evangelist
-  network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 17
+  pass: local-v1
+description: >-
+  WhoAPI (founded 2011, WhoAPI Inc.) is a domain-intelligence API company that
+  exposes WHOIS records, real-time domain availability across hundreds of TLDs,
+  domain age, domain reputation/score, SSL certificate inspection, email score,
+  IP/domain blacklist checks, and website screenshots through a single
+  key-authenticated REST endpoint (api.whoapi.com). Every request is an HTTP GET
+  selecting a task with the `r` parameter and returning gzip-compressed JSON with
+  a numeric `status` and human-readable `status_desc`. It serves cybersecurity
+  teams, domain registrars, SEO agencies, and fraud-detection systems, with
+  first-party and community SDKs for Ruby, Python, Go, and R.
 url: https://raw.githubusercontent.com/api-evangelist/whoapi/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://whoapi.com/wp-content/uploads/2024/04/API-company-illustration.svg
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
@@ -11,15 +37,91 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
-apis: []
+- Domains
+- WHOIS
+- Domain Availability
+- SSL
+- Email Verification
+- Blacklist
+- Cybersecurity
+- Domain Intelligence
+- Screenshots
+- Reputation
+apis:
+- aid: whoapi:whoapi-domain-intelligence-api
+  name: WhoAPI Domain Intelligence API
+  description: The Domain Intelligence API from WhoAPI — 1 operation(s) for domain intelligence.
+  humanURL: https://whoapi.com/api-documentation/
+  baseURL: https://api.whoapi.com/
+  tags:
+  - Domain Intelligence
+  properties:
+  - type: OpenAPI
+    url: openapi/whoapi-domain-intelligence-api-openapi.yml
+  - type: Documentation
+    url: https://whoapi.com/api-documentation/
+  - type: APIReference
+    url: https://whoapi.com/api-documentation/
+  - type: Authentication
+    url: authentication/whoapi-authentication.yml
+  - type: Conventions
+    url: conventions/whoapi-conventions.yml
+  - type: ErrorCatalog
+    url: errors/whoapi-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/whoapi-lifecycle.yml
+  - type: DataModel
+    url: data-model/whoapi-data-model.yml
+  - type: Conformance
+    url: conformance/whoapi-conformance.yml
+  - type: Sandbox
+    url: sandbox/whoapi-sandbox.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/whoapi-domain-security.yml
 - type: Website
   url: https://whoapi.com
+- type: DeveloperPortal
+  url: https://whoapi.com/api-documentation/
+- type: Documentation
+  url: https://whoapi.com/api-documentation/
+- type: APIReference
+  url: https://whoapi.com/api-documentation/
+- type: GettingStarted
+  url: https://whoapi.com/code-examples/
+- type: Blog
+  url: https://whoapi.com/blog/
+- type: Pricing
+  url: https://whoapi.com/whois-api-pricing/
+- type: SignUp
+  url: https://my.whoapi.com/user/signup
+- type: Login
+  url: https://my.whoapi.com/
+- type: PrivacyPolicy
+  url: https://whoapi.com/privacy-policy/
+- type: StatusPage
+  url: https://status.whoapi.com
+- type: GitHubOrganization
+  url: https://github.com/whoapi
+- type: Packages
+  url: packages/whoapi-packages.yml
+- type: SDKs
+  url: packages/whoapi-packages.yml
+- type: CLI
+  url: cli/whoapi-cli.yml
+- type: Authentication
+  url: authentication/whoapi-authentication.yml
+- type: LLMsTxt
+  url: llms/whoapi-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Conformance
+  url: conformance/whoapi-conformance.yml

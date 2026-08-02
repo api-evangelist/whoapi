@@ -1,0 +1,39 @@
+generated: '2026-07-21'
+method: searched
+source: https://github.com/whoapi + registry probes (rubygems/pypi/cran/pkg.go.dev)
+packages:
+- language: ruby
+  registry: rubygems
+  name: whoapi
+  url: https://rubygems.org/gems/whoapi
+  install: gem install whoapi
+  source: https://github.com/whoapi/whoapi-ruby
+  version: '0.1.0'
+  downloads: 3510
+  official: true
+- language: python
+  registry: pypi
+  name: whoapi
+  url: https://pypi.org/project/whoapi/
+  install: pip install whoapi
+  source: https://github.com/0x19/whoapi-python
+  version: 0.1.2
+  author: Nevio Vesic
+  official: true
+- language: go
+  registry: github
+  name: github.com/WhoAPI/whoapi-go
+  url: https://github.com/WhoAPI/whoapi-go
+  install: go get github.com/WhoAPI/whoapi-go
+  source: https://github.com/WhoAPI/whoapi-go
+  note: Mirror of github.com/tg/whoapi; ships a client package and a command-line tool.
+  official: false
+- language: r
+  registry: cran
+  name: whoapi
+  url: https://cran.r-project.org/package=whoapi
+  install: install.packages("whoapi")
+  source: https://github.com/WhoAPI/whoapi-r
+  author: Oliver Keyes
+  note: Community-authored R client, hosted under the WhoAPI GitHub organization.
+  official: false

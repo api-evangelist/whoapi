@@ -1,0 +1,33 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/whoapi-openapi.yml + https://whoapi.com/api-documentation/
+note: >-
+  WhoAPI is a lookup API with no persisted, cross-linked resources; each task
+  returns a standalone record keyed by the input (domain, email, IP, or URL).
+  Entities below are the logical result shapes, not stored objects.
+entities:
+- name: Domain
+  key: domain
+  produced_by: [whois, taken, domainscore, domainscore-check, blacklist]
+  relationships:
+  - {type: has_one, target: Certificate, via: domain}
+  - {type: has_one, target: DomainScore, via: domain}
+- name: Certificate
+  key: domain
+  produced_by: [cert]
+  relationships:
+  - {type: belongs_to, target: Domain, via: domain}
+- name: DomainScore
+  key: domain
+  produced_by: [domainscore, domainscore-check]
+  relationships:
+  - {type: belongs_to, target: Domain, via: domain}
+- name: EmailScore
+  key: email
+  produced_by: [emailscore, emailscore-check]
+- name: Blacklist
+  key: [domain, ip]
+  produced_by: [blacklist]
+- name: Screenshot
+  key: fullurl
+  produced_by: [screenshot]
