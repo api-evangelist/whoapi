@@ -85,6 +85,10 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: MCPServer
+  url: mcp/whoapi-mcp.yml
+- type: Overlay
+  url: overlays/whoapi-openapi-overlay.yaml
 - type: DomainSecurity
   url: security/whoapi-domain-security.yml
 - type: Website
