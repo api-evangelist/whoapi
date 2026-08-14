@@ -1,9 +1,9 @@
 aid: whoapi
 name: WhoAPI
 x-enrichment:
-  date: '2026-07-21'
+  date: '2026-08-14'
   status: enriched
-  artifacts_added: 17
+  artifacts_added: 7
   pass: local-v1
 description: >-
   WhoAPI (founded 2011, WhoAPI Inc.) is a domain-intelligence API company that
@@ -37,7 +37,7 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-21'
+modified: '2026-08-14'
 tags:
 - Company
 - Domains
@@ -53,7 +53,14 @@ tags:
 apis:
 - aid: whoapi:whoapi-domain-intelligence-api
   name: WhoAPI Domain Intelligence API
-  description: The Domain Intelligence API from WhoAPI — 1 operation(s) for domain intelligence.
+  description: >-
+    A single HTTP GET endpoint (api.whoapi.com) exposing nine domain-intelligence
+    tasks selected by the `r` query parameter — whois, taken (availability), cert
+    (SSL), domainscore and domainscore-check, emailscore and emailscore-check,
+    blacklist, and screenshot. Authenticated with an `apikey` query parameter and
+    optional IP whitelisting. Responses are gzip-compressed JSON carrying a
+    numeric `status`; errors are returned in-band with HTTP 200. The two scoring
+    tasks are asynchronous and accept a `webhook_url` callback parameter.
   humanURL: https://whoapi.com/api-documentation/
   baseURL: https://api.whoapi.com/
   tags:
@@ -85,6 +92,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: AgenticAccess
+  url: agentic-access/whoapi-agentic-access.yml
 - type: MCPServer
   url: mcp/whoapi-mcp.yml
 - type: Overlay
@@ -129,3 +138,15 @@ common:
   url: skills/_index.yml
 - type: Conformance
   url: conformance/whoapi-conformance.yml
+- type: TermsOfService
+  url: https://whoapi.com/terms-of-use/
+- type: Support
+  url: https://whoapi.com/contact-us/
+- type: Plans
+  url: plans/whoapi-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/whoapi-rate-limits.yml
+- type: Webhooks
+  url: asyncapi/whoapi-webhooks.yml
+- type: ToolCrosswalk
+  url: mcp/whoapi-tool-crosswalk.yml
