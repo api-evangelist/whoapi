@@ -1,4 +1,4 @@
-generated: '2026-07-21'
+generated: '2026-08-14'
 method: searched
 source: https://whoapi.com/api-documentation/
 authentication:
@@ -30,10 +30,31 @@ pagination:
   note: Single-record lookups per request; no list pagination surface documented.
 rate_limiting:
   documented: true
+  headers: []
+  http_status_on_exhaustion: 200
+  ref: rate-limits/whoapi-rate-limits.yml
   note: >-
     Per-minute IP throttling (status 16), per-plan query limits (status 17/18/36),
     and high-usage limits are enforced; limits vary by plan. No rate-limit
-    response headers documented.
+    response headers and no 429 — exhaustion is signalled in-band via the
+    numeric `status` field inside an HTTP 200 body.
+async_and_callbacks:
+  supported: true
+  ref: asyncapi/whoapi-webhooks.yml
+  note: >-
+    The Domain Score and Email Score products are two-step (set task, then check
+    result). A callback can be requested per request by adding a `webhook_url`
+    query parameter; WhoAPI POSTs a JSON array of result objects to that URL and
+    retries 5 times on any HTTP error with a 5/15/30/60/60-minute ladder. No
+    signature or shared secret is documented, so subscribers cannot verify the
+    caller.
 versioning:
   scheme: none
   note: No version segment in the URL or version header; single unversioned endpoint.
+plans:
+  ref: plans/whoapi-plans-pricing.yml
+  note: >-
+    Each of the seven APIs is subscribed and metered separately; a single API
+    key spans whichever subscriptions the account holds. Only one API key per
+    account is permitted, and generating a new key immediately invalidates the
+    old one (source https://whoapi.com/faq/).

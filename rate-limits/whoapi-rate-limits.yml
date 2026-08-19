@@ -1,0 +1,77 @@
+generated: '2026-08-14'
+method: searched
+source: https://whoapi.com/api-documentation/
+docs:
+- https://whoapi.com/api-documentation/
+- https://whoapi.com/faq/
+- https://whoapi.com/whois-api-pricing/
+note: >-
+  WhoAPI enforces two distinct limits and signals BOTH in-band, inside an HTTP
+  200 body, via the numeric `status` field. There are NO rate-limit response
+  headers — no X-RateLimit-*, no RateLimit-*, no Retry-After — and no 429 status
+  code, so an agent cannot read remaining quota or a retry delay from the
+  response envelope. It must parse `status` and branch on 16 / 17 / 18 / 36.
+  This is the runtime-signal gap for this provider: the numbers are published on
+  the pricing pages, but the API returns none of them at request time.
+limit_count: 4
+signalling:
+  http_status_on_exhaustion: 200
+  status_code_field: status
+  description_field: status_desc
+  headers: []
+  retry_after_header: false
+  rate_limit_headers: false
+  quota_headers: false
+  proactive_notice: >-
+    WhoAPI emails the account holder ahead of time when the remaining request
+    balance approaches zero (source https://whoapi.com/faq/).
+limits:
+- id: ip-burst-block
+  scope: per-ip
+  window: 1 minute
+  limit: null
+  burst: null
+  action: block
+  block_duration: 1 minute
+  signal: {status: 16, status_desc: 'Too many tries, your IP has been blocked for a minute.'}
+  http_status: 200
+  note: >-
+    A per-IP burst throttle. The threshold is NOT published — only the effect
+    (a one-minute IP block) and the status code that reports it.
+- id: plan-query-limit
+  scope: per-account
+  window: month
+  limit: plan-dependent
+  action: reject
+  signal: {status: 17, status_desc: Query limit exceeded.}
+  http_status: 200
+  note: Monthly request allowance for the subscribed API; see plans/whoapi-plans-pricing.yml.
+- id: high-usage-limit
+  scope: per-account
+  window: unspecified
+  limit: plan-dependent
+  action: reject
+  signal: {status: 18, status_desc: Query high usage limit exceeded.}
+  http_status: 200
+  note: A secondary high-usage ceiling applied above the plan allowance; threshold not published.
+- id: monthly-quota-exhausted
+  scope: per-account
+  window: month
+  limit: plan-dependent
+  action: reject
+  signal: {status: 36, status_desc: 'You run out of monthly requests. Query limit exceeded.'}
+  http_status: 200
+  billing: not-charged
+  note: >-
+    Confirmed on the FAQ — once the monthly allowance is spent the account is
+    neither charged nor served. Related account-state codes 33/34/35 report the
+    free-tier equivalents.
+plan_quotas:
+  source: plans/whoapi-plans-pricing.yml
+  unit: requests/month
+  range: {min: 10000, max: 5000000}
+  free_tier: {requests: 10000, recurring: false}
+related:
+  errors: errors/whoapi-error-codes.yml
+  conventions: conventions/whoapi-conventions.yml
+  plans: plans/whoapi-plans-pricing.yml

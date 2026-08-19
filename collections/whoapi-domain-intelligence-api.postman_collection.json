@@ -1,0 +1,185 @@
+{
+  "item": [
+    {
+      "id": "e81b256d-7557-4a47-b343-94aa16b51535",
+      "name": "Domain Intelligence",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fb46b317-bb66-4393-823b-7cfcb97a3372",
+          "name": "Query a WhoAPI domain-intelligence task",
+          "request": {
+            "name": "Query a WhoAPI domain-intelligence task",
+            "description": {
+              "content": "Runs one of the WhoAPI tasks selected by the `r` parameter against a domain, email, IP, or full URL and returns the JSON result. Supported tasks: whois, taken, cert, domainscore, domainscore-check, emailscore, emailscore-check, blacklist, screenshot.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "r",
+                  "value": "<string>",
+                  "description": "(Required) The task to run."
+                },
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Your private WhoAPI API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "domain",
+                  "value": "<string>",
+                  "description": "Fully-qualified domain name including TLD (e.g. whoapi.com). Required for whois, taken, cert, domainscore, blacklist."
+                },
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<email>",
+                  "description": "Email address to score. Required for emailscore/emailscore-check."
+                },
+                {
+                  "disabled": false,
+                  "key": "ip",
+                  "value": "<string>",
+                  "description": "IP address. Used by the blacklist task."
+                },
+                {
+                  "disabled": false,
+                  "key": "fullurl",
+                  "value": "<string>",
+                  "description": "Fully-qualified URL. Used by the screenshot task."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c55bdcc4-41d9-4b4f-b65e-f381e890d33e",
+              "name": "Result payload. Always includes `status` and `status_desc`; a non-zero `status` indicates an application-level error (see the WhoAPI status-code catalog).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "r",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domain",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "key": "ip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fullurl",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 0,\n  \"status_desc\": \"Request successful!\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.whoapi.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8134475c-cceb-46cf-8d00-cd2c6e70fa29",
+    "name": "WhoAPI Domain Intelligence API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "WhoAPI exposes WHOIS, domain availability, domain age, domain score, SSL certificate, email score, IP/domain blacklist, and website screenshot data through a single HTTP GET endpoint. The task is selected with the `r` parameter and authenticated with an `apikey` query parameter. Responses are gzip-compressed JSON carrying a numeric `status` and a `status_desc`.\nThis specification was generated by the API Evangelist enrichment pipeline from WhoAPI's published documentation (https://whoapi.com/api-documentation/) — it faithfully captures the documented request contract; response schemas are modeled at the envelope level only, not fabricated per task.\n\nContact Support:\n Name: WhoAPI Support",
+      "type": "text/plain"
+    }
+  }
+}

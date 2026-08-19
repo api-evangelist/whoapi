@@ -1,12 +1,16 @@
-generated: '2026-07-21'
+generated: '2026-08-14'
 method: generated
-source: openapi/whoapi-openapi.yml
+source: openapi/whoapi-domain-intelligence-api-openapi.yml
 skills:
 - file: whoapi-check-domain-availability.md
   name: Check domain availability with WhoAPI
-  api: openapi/whoapi-openapi.yml
+  api: openapi/whoapi-domain-intelligence-api-openapi.yml
   operations: [queryWhoAPI]
 - file: whoapi-whois-lookup.md
   name: Look up WHOIS records with WhoAPI
-  api: openapi/whoapi-openapi.yml
+  api: openapi/whoapi-domain-intelligence-api-openapi.yml
+  operations: [queryWhoAPI]
+- file: whoapi-score-domain-with-webhook.md
+  name: Score a domain or email asynchronously with WhoAPI
+  api: openapi/whoapi-domain-intelligence-api-openapi.yml
   operations: [queryWhoAPI]

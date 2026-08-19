@@ -1,7 +1,7 @@
 ---
 name: Check domain availability with WhoAPI
 description: Determine whether a domain name is registered (taken) or available using the WhoAPI availability task.
-api: openapi/whoapi-openapi.yml
+api: openapi/whoapi-domain-intelligence-api-openapi.yml
 operations: [queryWhoAPI]
 ---
 

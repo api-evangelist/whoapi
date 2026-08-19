@@ -1,0 +1,122 @@
+generated: '2026-08-14'
+method: derived
+source: mcp/whoapi-mcp.yml + openapi/whoapi-domain-intelligence-api-openapi.yml
+note: >-
+  WhoAPI ships NO MCP server and NO GraphQL surface — the MCP tool list in
+  mcp/whoapi-mcp.yml is an API Evangelist CANDIDATE derived from the nine
+  documented `r` task values, so every row below binds to the same single REST
+  operation. This crosswalk exists because WhoAPI's REST surface is unusually
+  compressed: one path, one method, one operationId, with the real capability
+  boundary carried by a query-string enum rather than by distinct operations.
+  An agent reading only the OpenAPI sees ONE tool; the honest tool surface is
+  nine. The crosswalk records that divergence and the exact discriminator each
+  tool must set.
+surfaces:
+  openapi:
+    file: openapi/whoapi-domain-intelligence-api-openapi.yml
+    operations: 1
+    note: Single GET / operation, task selected by the `r` query parameter.
+  graphql:
+    endpoint: null
+    note: No GraphQL surface published.
+  mcp:
+    url: null
+    status: candidate
+    note: No hosted or stdio MCP server exists; tools/list could not be probed because no endpoint is published.
+discriminator:
+  parameter: r
+  in: query
+  note: >-
+    Every tool below is the same operation with a different `r` value. Each tool
+    inherits its real input contract from queryWhoAPI's parameters — apikey
+    (required), plus domain / email / ip / fullurl as the task demands.
+crosswalk:
+- tool: whois_lookup
+  category: domain-intelligence
+  rest: [queryWhoAPI]
+  binding: rest
+  discriminator: {r: whois}
+  inputs: [apikey, domain]
+  confidence: high
+- tool: domain_availability
+  category: domain-intelligence
+  rest: [queryWhoAPI]
+  binding: rest
+  discriminator: {r: taken}
+  inputs: [apikey, domain]
+  confidence: high
+- tool: ssl_certificate
+  category: security
+  rest: [queryWhoAPI]
+  binding: rest
+  discriminator: {r: cert}
+  inputs: [apikey, domain]
+  confidence: high
+- tool: domain_score
+  category: reputation
+  rest: [queryWhoAPI]
+  binding: rest
+  discriminator: {r: domainscore}
+  inputs: [apikey, domain]
+  confidence: high
+  note: >-
+    Asynchronous set-task call. Returns no score directly; results arrive via
+    domain_score_check or the webhook_url callback (asyncapi/whoapi-webhooks.yml).
+- tool: domain_score_check
+  category: reputation
+  rest: [queryWhoAPI]
+  binding: rest
+  discriminator: {r: domainscore-check}
+  inputs: [apikey, domain]
+  confidence: high
+- tool: email_score
+  category: reputation
+  rest: [queryWhoAPI]
+  binding: rest
+  discriminator: {r: emailscore}
+  inputs: [apikey, email]
+  confidence: high
+  note: Asynchronous set-task call; pair with email_score_check or a webhook.
+- tool: email_score_check
+  category: reputation
+  rest: [queryWhoAPI]
+  binding: rest
+  discriminator: {r: emailscore-check}
+  inputs: [apikey, email]
+  confidence: high
+- tool: blacklist_check
+  category: security
+  rest: [queryWhoAPI]
+  binding: rest
+  discriminator: {r: blacklist}
+  inputs: [apikey, domain, ip]
+  confidence: high
+- tool: screenshot
+  category: capture
+  rest: [queryWhoAPI]
+  binding: rest
+  discriminator: {r: screenshot}
+  inputs: [apikey, fullurl]
+  confidence: medium
+  note: >-
+    Documented in the `r` enum and answered by the FAQ ("Screenshot API"), but
+    it has no product page and no pricing page of its own, unlike the other
+    seven tasks.
+mcp_only: []
+rest_only: []
+webhook_only:
+- surface: domainscore.result
+  reason: >-
+    Result delivery via POST callback has no REST operation and no MCP tool —
+    an agent using the candidate tool set must poll the *_check tools instead.
+- surface: emailscore.result
+  reason: Same as above for email scoring.
+coverage:
+  tools_named: 9
+  tools_bound: 9
+  mcp_only: 0
+  rest_operations_total: 1
+  rest_operations_with_tool: 1
+  note: >-
+    9 tools bound to 1 operation — a 9:1 fan-in. Tool count is the meaningful
+    capability measure for this provider; operation count is not.

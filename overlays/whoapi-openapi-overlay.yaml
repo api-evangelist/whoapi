@@ -1,8 +1,14 @@
 overlay: 1.0.0
 info:
   title: API Evangelist enhancements for WhoAPI
-  version: 1.0.0
-extends: openapi/whoapi-openapi.yml
+  version: 1.1.0
+extends: openapi/whoapi-domain-intelligence-api-openapi.yml
+x-apievangelist:
+  generated: '2026-08-14'
+  method: generated
+  source: >-
+    API Evangelist enrichment pipeline — derived from the repo artifacts and
+    https://whoapi.com/how-to-use-domain-score-api/ (webhook_url parameter).
 actions:
 - target: $.info
   update:
@@ -14,10 +20,44 @@ actions:
       lifecycle: lifecycle/whoapi-lifecycle.yml
       data-model: data-model/whoapi-data-model.yml
       mcp: mcp/whoapi-mcp.yml
+      tool-crosswalk: mcp/whoapi-tool-crosswalk.yml
       sandbox: sandbox/whoapi-sandbox.yml
+      plans: plans/whoapi-plans-pricing.yml
+      rate-limits: rate-limits/whoapi-rate-limits.yml
+      webhooks: asyncapi/whoapi-webhooks.yml
+      well-known: well-known/whoapi-well-known.yml
+      agentic-access: agentic-access/whoapi-agentic-access.yml
 - target: $.paths['/'].get
   update:
     x-agent-notes: >-
       A non-zero JSON `status` is an application-level error even though HTTP is
       200 — always branch on `status`, not the HTTP code. See the 43-code catalog
-      in errors/whoapi-error-codes.yml.
+      in errors/whoapi-error-codes.yml. Quota exhaustion is also in-band
+      (status 16/17/18/36) with no 429 and no Retry-After header; see
+      rate-limits/whoapi-rate-limits.yml.
+    x-rate-limit-signal:
+      headers: []
+      in_band_status_codes: [16, 17, 18, 36]
+      http_status_on_exhaustion: 200
+    x-task-discriminator:
+      parameter: r
+      note: >-
+        The `r` enum is the real capability boundary — nine distinct products
+        behind one operation. See mcp/whoapi-tool-crosswalk.yml.
+- target: $.paths['/'].get.parameters
+  update:
+  - name: webhook_url
+    in: query
+    required: false
+    description: >-
+      Optional callback URL for the asynchronous scoring tasks (r=domainscore,
+      r=emailscore). When supplied, WhoAPI POSTs a JSON array of result objects
+      to this URL once scoring completes, retrying 5 times on any HTTP error
+      with a 5/15/30/60/60-minute delay ladder. Documented at
+      https://whoapi.com/how-to-use-domain-score-api/ but absent from the
+      request table in the main API documentation.
+    schema:
+      type: string
+      format: uri
+    x-apievangelist-added: true
+    x-apievangelist-source: https://whoapi.com/how-to-use-domain-score-api/

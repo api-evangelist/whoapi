@@ -1,16 +1,35 @@
-generated: '2026-07-21'
+generated: '2026-08-14'
 method: searched
-source: https://github.com/whoapi + registry probes (rubygems/pypi/cran/pkg.go.dev)
+source: >-
+  https://github.com/whoapi + registry metadata endpoints (rubygems.org/api/v1,
+  pypi.org/pypi, crandb.r-pkg.org, proxy.golang.org) — re-probed 2026-08-14
+note: >-
+  DECAY FINDING. Every WhoAPI client library — first-party and community — was
+  last released between 2015 and 2016. The R client was ARCHIVED by CRAN on
+  2021-02-16 at the maintainer's request. The Python distribution's release
+  metadata still lists 0.1.2 but PyPI now serves NO files for any release, so
+  `pip install whoapi` cannot resolve a distribution. The Ruby gem sits at
+  0.1.0 from 2016-01-18 with no tags, even though its repository received a
+  commit in 2023. The API itself is actively sold and actively documented (see
+  plans/whoapi-plans-pricing.yml, priced through 2026), so the client layer is
+  roughly a decade behind the product it wraps: none of these SDKs know about
+  the domain-age, domain-score, email-score or webhook surfaces WhoAPI sells
+  today. There is no npm, Packagist, Maven, NuGet or crates.io package.
+checked: '2026-08-14'
 packages:
 - language: ruby
   registry: rubygems
   name: whoapi
   url: https://rubygems.org/gems/whoapi
   install: gem install whoapi
-  source: https://github.com/whoapi/whoapi-ruby
-  version: '0.1.0'
-  downloads: 3510
+  source: https://github.com/WhoAPI/whoapi-ruby
+  version: 0.1.0
+  published: '2016-01-18'
+  downloads: 3520
   official: true
+  note: >-
+    Only version ever published; the repository has no release tags despite a
+    2023-06-30 push, so the shipped gem trails the source.
 - language: python
   registry: pypi
   name: whoapi
@@ -18,22 +37,61 @@ packages:
   install: pip install whoapi
   source: https://github.com/0x19/whoapi-python
   version: 0.1.2
-  author: Nevio Vesic
+  published: null
   official: true
+  author: Nevio Vesic
+  note: >-
+    version: 0.1.2 is the latest release recorded in PyPI metadata, but both
+    releases (0.1, 0.1.2) have ZERO files on the index, so no upload date exists
+    and the package is not installable. published: null is a checked-and-empty
+    result, not an unchecked field.
 - language: go
-  registry: github
+  registry: goproxy
   name: github.com/WhoAPI/whoapi-go
-  url: https://github.com/WhoAPI/whoapi-go
+  url: https://pkg.go.dev/github.com/WhoAPI/whoapi-go
   install: go get github.com/WhoAPI/whoapi-go
   source: https://github.com/WhoAPI/whoapi-go
-  note: Mirror of github.com/tg/whoapi; ships a client package and a command-line tool.
+  version: v0.0.0-20150831011731-f71a56bdd4e2
+  published: '2015-08-31'
   official: false
+  note: >-
+    Untagged module — proxy.golang.org resolves only a pseudo-version pinned to
+    the 2015-08-31 commit. Mirror of github.com/tg/whoapi (same pseudo-version);
+    ships a client package and a command-line tool (see cli/whoapi-cli.yml).
 - language: r
   registry: cran
   name: whoapi
   url: https://cran.r-project.org/package=whoapi
   install: install.packages("whoapi")
   source: https://github.com/WhoAPI/whoapi-r
-  author: Oliver Keyes
-  note: Community-authored R client, hosted under the WhoAPI GitHub organization.
+  version: 0.1.2
+  published: '2016-09-12'
   official: false
+  status: archived
+  archived: '2021-02-16'
+  archive_url: https://cran.r-project.org/src/contrib/Archive/whoapi/
+  author: Oliver Keyes
+  note: >-
+    Community-authored R client mirrored under the WhoAPI GitHub org. CRAN
+    states "Archived on 2021-02-16 at the request of the maintainer" — it is no
+    longer installable from the main repository.
+registries_checked:
+- {registry: npm, package: whoapi, status: 404}
+- {registry: rubygems, package: whoapi, status: 200}
+- {registry: pypi, package: whoapi, status: 200}
+- {registry: cran, package: whoapi, status: 200, state: archived}
+- {registry: goproxy, package: github.com/WhoAPI/whoapi-go, status: 200}
+github_org:
+  url: https://github.com/whoapi
+  name: WhoAPI Inc.
+  public_repos: 3
+  repos:
+  - {name: whoapi-ruby, language: Ruby, last_push: '2023-06-30'}
+  - {name: whoapi-go, language: Go, last_push: '2015-08-31'}
+  - {name: whoapi-r, language: R, last_push: '2015-06-17'}
+alternatives:
+  code_examples: https://whoapi.com/code-examples/
+  note: >-
+    WhoAPI's practical integration path is its per-language code-examples pages
+    (PHP, JavaScript, Ruby, Python, Objective-C, C#, Java) rather than an
+    installable SDK — snippets against a single GET endpoint, not packages.

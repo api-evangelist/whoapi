@@ -17,7 +17,7 @@ cli:
     env: WHOAPI_KEY
     note: API key can be provided via the WHOAPI_KEY environment variable or the --key flag.
   usage: whoapi <task> <domain>
-  tasks_source: openapi/whoapi-openapi.yml#queryWhoAPI
+  tasks_source: openapi/whoapi-domain-intelligence-api-openapi.yml#queryWhoAPI
   tasks:
   - whois
   - taken

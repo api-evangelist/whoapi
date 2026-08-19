@@ -1,11 +1,9 @@
-generated: '2026-07-21'
+generated: '2026-08-14'
 method: derived
 status: candidate
 source: https://whoapi.com/api-documentation/
-note: >-
-  No official WhoAPI-hosted MCP server was found. The tools below are a candidate
-  surface derived from the documented WhoAPI tasks (the `r` parameter values), one
-  tool per task, all grounded in openapi/whoapi-openapi.yml#queryWhoAPI.
+note: No official WhoAPI-hosted MCP server was found. The tools below are a candidate surface derived
+  from the documented WhoAPI tasks (the `r` parameter values), one tool per task, all grounded in openapi/whoapi-domain-intelligence-api-openapi.yml#queryWhoAPI.
 server:
   name: whoapi
   transport: http
@@ -13,36 +11,51 @@ tools:
 - name: whois_lookup
   description: Retrieve WHOIS records, domain age, and registration data for a domain.
   task: whois
-  source_operation: openapi/whoapi-openapi.yml#queryWhoAPI
+  source_operation: openapi/whoapi-domain-intelligence-api-openapi.yml#queryWhoAPI
 - name: domain_availability
   description: Check whether a domain is registered/taken across supported TLDs.
   task: taken
-  source_operation: openapi/whoapi-openapi.yml#queryWhoAPI
+  source_operation: openapi/whoapi-domain-intelligence-api-openapi.yml#queryWhoAPI
 - name: ssl_certificate
   description: Inspect the SSL/TLS certificate for a domain.
   task: cert
-  source_operation: openapi/whoapi-openapi.yml#queryWhoAPI
+  source_operation: openapi/whoapi-domain-intelligence-api-openapi.yml#queryWhoAPI
 - name: domain_score
   description: Retrieve the reputation score for a domain.
   task: domainscore
-  source_operation: openapi/whoapi-openapi.yml#queryWhoAPI
+  source_operation: openapi/whoapi-domain-intelligence-api-openapi.yml#queryWhoAPI
 - name: domain_score_check
   description: Run a fresh domain reputation score check.
   task: domainscore-check
-  source_operation: openapi/whoapi-openapi.yml#queryWhoAPI
+  source_operation: openapi/whoapi-domain-intelligence-api-openapi.yml#queryWhoAPI
 - name: email_score
   description: Score an email address 0-100 and detect temporary/disposable addresses.
   task: emailscore
-  source_operation: openapi/whoapi-openapi.yml#queryWhoAPI
+  source_operation: openapi/whoapi-domain-intelligence-api-openapi.yml#queryWhoAPI
 - name: email_score_check
   description: Run a fresh email score check.
   task: emailscore-check
-  source_operation: openapi/whoapi-openapi.yml#queryWhoAPI
+  source_operation: openapi/whoapi-domain-intelligence-api-openapi.yml#queryWhoAPI
 - name: blacklist_check
   description: Check a domain or IP against common blacklists.
   task: blacklist
-  source_operation: openapi/whoapi-openapi.yml#queryWhoAPI
+  source_operation: openapi/whoapi-domain-intelligence-api-openapi.yml#queryWhoAPI
 - name: screenshot
   description: Capture a website screenshot for a full URL.
   task: screenshot
-  source_operation: openapi/whoapi-openapi.yml#queryWhoAPI
+  source_operation: openapi/whoapi-domain-intelligence-api-openapi.yml#queryWhoAPI
+crosswalk: mcp/whoapi-tool-crosswalk.yml
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: api-key
+  verified: searched
+  tools: 9
+  checked: '2026-08-14'
+  source: >-
+    Web search for a WhoAPI MCP server (2026-08-14) returned nothing first-party;
+    the only domain-intelligence MCP servers found belong to other vendors
+    (WhoisXML API, Whapi). No hosted endpoint and no stdio package exists, so
+    mode is none and the tool list stays a candidate.

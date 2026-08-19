@@ -1,0 +1,46 @@
+generated: '2026-08-14'
+method: probed
+source: live HTTP probes of every WhoAPI host in apis.yml + OpenAPI servers[]
+note: >-
+  Every /.well-known/ path was probed on all three WhoAPI hosts and every one
+  returned HTTP 404 with an HTML error body. WhoAPI serves NO well-known
+  discovery surface — no security.txt, no OIDC/OAuth metadata, no api-catalog,
+  no ai-plugin manifest, and no A2A agent card. This file records that measured
+  absence; NO `WellKnown` or `SecurityTxt` pointer is emitted in apis.yml,
+  because the pointer would assert a surface the provider does not serve.
+checked: '2026-08-14'
+hosts:
+- host: https://api.whoapi.com
+  role: api
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+- host: https://whoapi.com
+  role: website
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+- host: https://my.whoapi.com
+  role: console
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+summary:
+  paths_probed: 16
+  hits: 0
+  security_txt: false
+  openid_configuration: false
+  oauth_authorization_server: false
+  api_catalog: false
+  ai_plugin: false
+  agent_card: false

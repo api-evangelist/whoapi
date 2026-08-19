@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WhoAPI Domain Intelligence API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Domain Intelligence",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query a WhoAPI domain-intelligence task",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.whoapi.com/",
+            "params": [
+              {
+                "name": "r",
+                "value": "",
+                "type": "query",
+                "description": "The task to run."
+              },
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your private WhoAPI API key."
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "query",
+                "description": "Fully-qualified domain name including TLD (e.g. whoapi.com). Required for whois, taken, cert, domainscore, blacklist."
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "Email address to score. Required for emailscore/emailscore-check."
+              },
+              {
+                "name": "ip",
+                "value": "",
+                "type": "query",
+                "description": "IP address. Used by the blacklist task."
+              },
+              {
+                "name": "fullurl",
+                "value": "",
+                "type": "query",
+                "description": "Fully-qualified URL. Used by the screenshot task."
+              }
+            ]
+          },
+          "docs": "Runs one of the WhoAPI tasks selected by the `r` parameter against a domain, email, IP, or full URL and returns the JSON result. Supported tasks: whois, taken, cert, domainscore, domainscore-check, emailscore, emailscore-check, blacklist, screenshot."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

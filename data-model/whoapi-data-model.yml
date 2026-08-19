@@ -1,6 +1,6 @@
 generated: '2026-07-21'
 method: derived
-source: openapi/whoapi-openapi.yml + https://whoapi.com/api-documentation/
+source: openapi/whoapi-domain-intelligence-api-openapi.yml + https://whoapi.com/api-documentation/
 note: >-
   WhoAPI is a lookup API with no persisted, cross-linked resources; each task
   returns a standalone record keyed by the input (domain, email, IP, or URL).

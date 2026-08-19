@@ -1,4 +1,4 @@
-generated: '2026-07-21'
+generated: '2026-08-14'
 method: searched
 source: https://whoapi.com/api-documentation/
 versioning:
@@ -8,9 +8,44 @@ versioning:
 deprecation:
   policy_url: null
   sunset_header: false
-  note: No published deprecation policy or RFC 8594 Sunset/Deprecation header support found.
+  note: >-
+    No published deprecation policy and no RFC 8594 Sunset/Deprecation header
+    support found. Re-probed 2026-08-14 — /release-notes/, /api-changelog/ and
+    /updates/ all return 404, and the blog carries marketing posts rather than
+    dated release notes, so there is no change log surface either.
+changelog:
+  url: null
+  note: No dated changelog published; /changelog/ returns 404.
 sla:
   url: null
   uptime_target: null
-status_page: https://status.whoapi.com
+  note: >-
+    An SLA is advertised as a plan feature on the higher tiers (Whois
+    Business/Enterprise, Domain Availability Business/Enterprise, Domain Age,
+    Email Blacklist Business — see plans/whoapi-plans-pricing.yml), but no SLA
+    document, uptime target, or credit schedule is published publicly.
+status_page:
+  url: https://status.whoapi.com
+  status: 200
+  checked: '2026-08-14'
+  components: [SSL, Blacklist, Domain Availability, Whois, Domain Score, Email Score, Website, Members Area]
+  history: false
+  machine_readable: false
+  note: >-
+    Live component board covering six APIs plus the website and members area.
+    It reports current state only — no incident history feed, no JSON/RSS
+    endpoint, and no uptime percentages.
+support:
+  channels: [live chat, support ticket, phone (dedicated clients only)]
+  url: https://whoapi.com/contact-us/
+  email: null
+  note: >-
+    WhoAPI publishes no support email address; the contact page directs all
+    inquiries to the on-site chat widget, which also opens tickets. Phone
+    support exists only for packages that include it.
+company:
+  legal_name: WhoAPI Inc.
+  founded: 2011
+  domain_registered: '2011-02-14'
+  address: 800 W El Camino Real, Suite 180, Mountain View, CA 94040, USA
 deprecated_operations: []

@@ -14,7 +14,7 @@ schemes:
   description: >-
     Every request must carry the account's private API key as the `apikey`
     query parameter, e.g. https://api.whoapi.com/?domain=whoapi.com&r=whois&apikey=YOUR_API_KEY
-  sources: [openapi/whoapi-openapi.yml]
+  sources: [openapi/whoapi-domain-intelligence-api-openapi.yml]
 notes:
 - IP whitelisting is available in account settings (status code 15 = "IP not whitelisted").
 - No OAuth2/OIDC surface; the API is single-key.

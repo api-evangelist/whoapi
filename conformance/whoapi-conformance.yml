@@ -1,6 +1,12 @@
-generated: '2026-07-21'
+generated: '2026-08-14'
 method: derived
-source: openapi/whoapi-openapi.yml + https://whoapi.com/api-documentation/
+source: openapi/whoapi-domain-intelligence-api-openapi.yml + https://whoapi.com/api-documentation/
+note: >-
+  No published compliance program, certification, or trust center was found for
+  WhoAPI (probe-security-programs.py returned vdp=none trust=none on
+  2026-08-14), so NO `Compliance` or `TrustCenter` pointer is emitted. The
+  standards below are conformance assertions derived from the contract and the
+  documentation, not certification claims.
 standards:
 - id: oauth2
   conforms: false
@@ -25,3 +31,28 @@ standards:
 - id: idempotency
   conforms: partial
   evidence: All operations are safe GET reads (naturally idempotent) but no Idempotency-Key contract.
+- id: asyncapi
+  conforms: false
+  evidence: No AsyncAPI document published; the webhook surface is prose-only (asyncapi/whoapi-webhooks.yml).
+- id: webhooks
+  conforms: true
+  evidence: >-
+    Documented HTTP POST callbacks for Domain Score and Email Score via the
+    `webhook_url` request parameter, with a published 5-attempt retry ladder.
+- id: webhook-signatures
+  conforms: false
+  evidence: No signing secret, HMAC header, or verification procedure documented for webhook callbacks.
+- id: rfc6585-rate-limit-headers
+  conforms: false
+  evidence: >-
+    No 429, no Retry-After, and no RateLimit-*/X-RateLimit-* headers; quota
+    exhaustion is reported in-band as status 16/17/18/36 inside an HTTP 200.
+- id: rfc8615-well-known
+  conforms: false
+  evidence: All 16 /.well-known/ probes across three hosts returned 404 (well-known/whoapi-well-known.yml).
+- id: a2a-agent-card
+  conforms: false
+  evidence: /.well-known/agent-card.json and /.well-known/agent.json returned 404 on every host.
+- id: soc2
+  conforms: unknown
+  evidence: No trust center, certification page, or compliance statement found on whoapi.com.

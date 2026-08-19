@@ -1,0 +1,63 @@
+generated: '2026-08-14'
+method: searched
+source: https://whoapi.com/how-to-use-domain-score-api/
+docs:
+- https://whoapi.com/how-to-use-domain-score-api/
+- https://whoapi.com/how-to-use-email-score-api/
+spec_type: none
+note: >-
+  WhoAPI publishes NO AsyncAPI document — probed for one and found nothing. It
+  DOES document a real, callable webhook surface for its two asynchronous
+  scoring products (Domain Score and Email Score), which are two-step
+  set-then-check flows rather than real-time lookups. The webhook is opted into
+  per request by adding a `webhook_url` query parameter to the set-task call;
+  WhoAPI then POSTs the finished result to that URL. "Webhook support" is also
+  listed as a paid feature on every Domain Score and Email Score pricing tier.
+  This is captured as a webhook catalog, not as a fabricated AsyncAPI.
+delivery:
+  transport: http
+  method: POST
+  subscription_model: per-request
+  subscription_parameter: webhook_url
+  subscription_note: >-
+    Not a registered endpoint — the callback URL is supplied inline on each
+    scoring request, so there is no webhook management API, no shared secret,
+    and no signature header documented.
+  content_type: application/json
+  payload_shape: array-of-objects
+  signature: null
+  security: none-documented
+retries:
+  supported: true
+  attempts: 5
+  trigger: any HTTP error response from the subscriber URL
+  backoff_minutes: [5, 15, 30, 60, 60]
+  note: Fixed retry ladder published verbatim in the Domain Score and Email Score guides.
+webhooks:
+- name: domainscore.result
+  product: Domain Score API
+  task: domainscore
+  trigger: A domain submitted with the Set Task call has finished scoring.
+  request_example: https://api.whoapi.com/?domain=whoapi.com&r=domainscore&apikey=yourkey&webhook_url=https://yourwebsite.com/yourscript
+  payload_example: '[{"id":9673,"domain":"whoapi.com","overall_score":68,"temp_email_service":false,"score_description":"Good"}]'
+  payload_note: Array of all scored domains as objects; object fields match the Get Result API reply fields.
+  docs: https://whoapi.com/how-to-use-domain-score-api/
+  alternative: Poll the Get Result API (r=domainscore-check) instead.
+- name: emailscore.result
+  product: Email Score API
+  task: emailscore
+  trigger: An email address submitted with the Set Task call has finished scoring.
+  request_example: https://api.whoapi.com/?email=noreply@whoapi.com&r=emailscore&apikey=yourkey&webhook_url=https://yourwebsite.com/yourscript
+  payload_example: '[{"id":9673,"email":"noreply@whoapi.com","overall_score":68,"temp_email_service":false,"score_description":"Good"}]'
+  payload_note: Array of all scored emails as objects; object fields match the Get Result API reply fields.
+  docs: https://whoapi.com/how-to-use-email-score-api/
+  alternative: Poll the Get Result API (r=emailscore-check) instead.
+gaps:
+- No AsyncAPI or other machine-readable event contract is published.
+- No webhook signing/verification scheme is documented; subscribers cannot authenticate the callback.
+- The `webhook_url` parameter is absent from the API Evangelist-generated OpenAPI; captured in overlays/whoapi-openapi-overlay.yaml.
+- No webhook delivery log, replay endpoint, or management surface.
+related:
+  openapi: openapi/whoapi-domain-intelligence-api-openapi.yml
+  conventions: conventions/whoapi-conventions.yml
+  plans: plans/whoapi-plans-pricing.yml
