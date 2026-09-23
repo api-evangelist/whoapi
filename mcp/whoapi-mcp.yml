@@ -47,15 +47,7 @@ tools:
 crosswalk: mcp/whoapi-tool-crosswalk.yml
 deployment:
   mode: none
-  endpoint: null
-  install: null
-  package: null
-  auth: api-key
-  verified: searched
+  verified: derived
   tools: 9
-  checked: '2026-08-14'
-  source: >-
-    Web search for a WhoAPI MCP server (2026-08-14) returned nothing first-party;
-    the only domain-intelligence MCP servers found belong to other vendors
-    (WhoisXML API, Whapi). No hosted endpoint and no stdio package exists, so
-    mode is none and the tool list stays a candidate.
+  checked: '2026-08-12'
+  source: catalog MCP census
