@@ -2,8 +2,15 @@
   "repo": "whoapi",
   "feeds": [
     {
-      "source": "https://whoapi.com/code-examples/",
-      "feed_url": "https://whoapi.com/code-examples/feed/",
+      "source": "https://whoapi.com/blog/feed/",
+      "feed_url": "https://whoapi.com/blog/feed/",
+      "title": "",
+      "saved": 1,
+      "method": "feed"
+    },
+    {
+      "source": "https://whoapi.com/blog/",
+      "feed_url": "https://whoapi.com/blog/feed/",
       "title": "",
       "saved": 0,
       "method": "discovered"
@@ -16,6 +23,6 @@
       "method": "feed"
     }
   ],
-  "post_count": 0,
-  "fetched": "2026-10-03T12:30:02Z"
+  "post_count": 1,
+  "fetched": "2026-10-10T13:15:00Z"
 }
